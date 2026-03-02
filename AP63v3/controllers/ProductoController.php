@@ -14,13 +14,12 @@ class ProductoController {
     }
 
     public function crear() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id = uniqid(); 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
             $nombre = $_POST['nombre'];
             $precio = $_POST['precio'];
             $electrica = $_POST['electrica'];
 
-            $producto = new Bici($id, $nombre, $precio, $electrica);
+            $producto = new Bici($nombre, $precio, $electrica);
             $this->gestor->agregar($producto);
 
             header("Location: index.php");
