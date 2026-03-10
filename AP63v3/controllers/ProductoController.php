@@ -14,7 +14,7 @@ class ProductoController {
     }
 
     public function crear() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nombre = $_POST['nombre'];
             $precio = $_POST['precio'];
             $electrica = $_POST['electrica'];
@@ -31,15 +31,12 @@ class ProductoController {
 
     public function editar() {
         $id = $_GET['id'] ?? null;
-        $producto = $this->gestor->buscar($id);
-
-        if (!$producto) {
-            echo "Producto no encontrado";
-            exit;
-        }
-
+        $producto=($this->gestor->buscar($id));
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->gestor->actualizar($id, $_POST['nombre'], $_POST['precio'], $_POST['electrica']);
+            $producto->setNombre($_POST['nombre']);
+            $producto->setPrecio($_POST['precio']);
+            $producto->setElectrica($_POST['electrica']);
+            $this->gestor->actualizar($producto);
             header("Location: index.php");
             exit;
         }
